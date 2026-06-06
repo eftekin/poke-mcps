@@ -1,17 +1,30 @@
-# Poke MCP Servers
+# poke-mcps
 
-A collection of MCP servers for [Poke](https://poke.com) — the iMessage AI assistant.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
+[![Poke](https://img.shields.io/badge/Poke-iMessage%20AI-black.svg)](https://poke.com)
+
+A collection of MCP servers built for [Poke](https://poke.com), the iMessage AI assistant.
 
 ## Servers
 
-| Directory | Description | Data Source |
-|-----------|-------------|-------------|
-| [`f1/`](./f1/) | Formula 1 live data (standings, laps, telemetry) | OpenF1 API (free) |
+| Directory | Description | Data Source | Status |
+|-----------|-------------|-------------|--------|
+| [`f1/`](./f1/) | Formula 1 live data — standings, laps, telemetry, race control | [OpenF1](https://openf1.org) (free) | ✅ Live |
 
-## Adding to Poke
+## How It Works
 
-Settings → Integrations → Add Custom MCP Server → Enter URL → Save
+Each server is an independent Python service using [FastMCP](https://gofastmcp.com), deployed to [Render.com](https://render.com) on the free tier. Once deployed, the server URL is added to Poke as a custom MCP integration.
 
-## Deployment
+## Adding a Server to Poke
 
-Each server deploys independently to [Render.com](https://render.com) free tier. See the `README.md` inside each directory for instructions.
+**Settings → Integrations → Add Custom MCP Server**
+
+| Field | Value |
+|-------|-------|
+| URL | `https://<your-render-url>/mcp` |
+| Auth | None |
+
+## License
+
+[MIT](LICENSE)
