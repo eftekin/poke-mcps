@@ -1,0 +1,12 @@
+name = "f1-mcp"
+main = "src/index.ts"
+compatibility_date = "2025-06-06"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+routes = [
+  { pattern = "f1-mcp.eftekin.com", custom_domain = true }
+]
+
+[observability]
+enabled = true
