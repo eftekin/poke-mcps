@@ -8,9 +8,10 @@ Custom MCP servers that extend [Poke](https://poke.com) — the iMessage AI assi
 
 ## Servers
 
-| | Server | Description | Data Source |
-|---|--------|-------------|-------------|
-| 🏎️ | [`f1/`](./f1/) | Formula 1 live data — standings, laps, telemetry, race control, championship | [OpenF1](https://openf1.org) + [Jolpica](https://jolpi.ca) |
+| | Server | Description | Deploy |
+|---|--------|-------------|--------|
+| 🏎️ | [`f1/`](./f1/) | Formula 1 live data — standings, laps, telemetry, race control, championship | ☁️ Cloud (Render) |
+| 🖥️ | [`poke-assistant/`](./poke-assistant/) | macOS context — system telemetry, media, Discord activity, active IDE | 🏠 Local + Cloudflare Tunnel |
 
 ## How It Works
 
