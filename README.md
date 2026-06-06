@@ -8,27 +8,30 @@ Custom MCP servers that extend [Poke](https://poke.com) — the iMessage AI assi
 
 ## Servers
 
-| | Server | Description | Deploy |
-|---|--------|-------------|--------|
-| 🏎️ | [`f1/`](./f1/) | Formula 1 live data — standings, laps, telemetry, race control, championship | ☁️ Cloud (Render) |
-| 🖥️ | [`poke-assistant/`](./poke-assistant/) | macOS context — system telemetry, media, Discord activity, active IDE | 🏠 Local + Cloudflare Tunnel |
+| | Server | Description | Deploy | URL |
+|---|--------|-------------|--------|-----|
+| 🏎️ | [`f1-workers/`](./f1-workers/) | Formula 1 live data — standings, laps, telemetry, race control | ☁️ Cloudflare Workers | `f1-mcp.eftekin.com/mcp` |
+| 🖥️ | [`poke-assistant/`](./poke-assistant/) | macOS context — system telemetry, media, Discord activity, active IDE | 🏠 Local + Cloudflare Tunnel | `mcp.eftekin.com/mcp` |
 
 ## How It Works
 
-Each server is an independent Python service using [FastMCP](https://gofastmcp.com) deployed to [Render.com](https://render.com) free tier. Poke discovers available tools automatically — no configuration needed beyond adding the URL.
+```
+Poke (iMessage) → MCP Server → Data Source (API)
+```
 
-```
-Poke (iMessage) → MCP Server (Render) → Data Source (API)
-```
+- **f1-workers**: TypeScript on [Cloudflare Workers](https://workers.cloudflare.com) — no cold starts, always on, free tier
+- **poke-assistant**: Python on your Mac, exposed via a [Cloudflare named tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/)
 
 ## Adding a Server to Poke
 
 **Poke → Settings → Integrations → Add Custom MCP Server**
 
-- **URL**: `https://<your-render-url>/mcp`
-- **Auth**: None
+| Server | URL | Auth |
+|--------|-----|------|
+| F1 Live Data | `https://f1-mcp.eftekin.com/mcp` | None |
+| Poke Assistant | `https://mcp.eftekin.com/mcp` | Bearer token |
 
-See each server's README for the specific deploy URL and setup steps.
+See each server's README for setup and deployment details.
 
 ## License
 
