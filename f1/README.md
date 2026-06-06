@@ -1,36 +1,36 @@
 # F1 Live Data MCP
 
-Formula 1 gerçek zamanlı veri sunucusu. [OpenF1 API](https://openf1.org) kullanır — ücretsiz, kayıt gerekmez.
+Real-time Formula 1 data server powered by the [OpenF1 API](https://openf1.org) — free, no sign-up required.
 
-## Araçlar
+## Tools
 
-| Tool | Açıklama |
-|------|----------|
-| `get_race_schedule` | Sezon takvimi |
-| `get_latest_session` | Aktif/son oturum |
-| `get_sessions` | Oturumları filtrele (yıl, tip, ülke) |
-| `get_drivers` | Sürücü listesi |
-| `get_positions` | Anlık sıralama (4sn güncelleme) |
-| `get_intervals` | Araç arası süre farkları |
-| `get_laps` | Tur süreleri ve sektör zamanları |
-| `get_stints` | Lastik stratejisi |
-| `get_pit_stops` | Pit stop verileri |
-| `get_weather` | Hava durumu |
-| `get_race_control` | Safety car, bayraklar, cezalar |
-| `get_team_radio` | Telsiz mesajları |
-| `get_telemetry` | Araç telemetri (hız, gaz, fren, vites) |
+| Tool | Description |
+|------|-------------|
+| `get_race_schedule` | Full season calendar |
+| `get_latest_session` | Current or most recent session |
+| `get_sessions` | Filter sessions by year, type, or country |
+| `get_drivers` | Driver list for a session |
+| `get_positions` | Live standings (updates every 4s) |
+| `get_intervals` | Gap to leader and gap ahead |
+| `get_laps` | Lap times and sector splits |
+| `get_stints` | Tyre strategy data |
+| `get_pit_stops` | Pit stop records |
+| `get_weather` | Track and air conditions |
+| `get_race_control` | Safety car, flags, penalties |
+| `get_team_radio` | Radio messages |
+| `get_telemetry` | Car telemetry (speed, throttle, brake, gear) |
 
-## Deploy (Render.com — Ücretsiz)
+## Deploy to Render.com (Free)
 
-1. [render.com](https://render.com) → New → Web Service
-2. Bu repoyu bağlayın, **Root Directory** olarak `f1` girin
-3. **Build**: `pip install -r requirements.txt`
-4. **Start**: `fastmcp run src/server.py:mcp --transport streamable-http --host 0.0.0.0 --port $PORT`
-5. **Instance Type**: Free
+1. Go to [render.com](https://render.com) → New → Web Service
+2. Connect this repository, set **Root Directory** to `f1`
+3. **Build Command**: `pip install -r requirements.txt`
+4. **Start Command**: `fastmcp run src/server.py:mcp --transport streamable-http --host 0.0.0.0 --port $PORT`
+5. **Instance Type**: Free → Deploy
 
-## Poke'a Ekleme
+## Adding to Poke
 
 Settings → Integrations → Add Custom MCP Server
 
-- **URL**: `https://<render-url>/mcp`
-- Auth: None
+- **URL**: `https://<your-render-url>/mcp`
+- **Auth**: None

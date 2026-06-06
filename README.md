@@ -1,17 +1,17 @@
 # Poke MCP Servers
 
-[Poke](https://poke.com) iMessage AI için MCP sunucuları.
+A collection of MCP servers for [Poke](https://poke.com) — the iMessage AI assistant.
 
-## Sunucular
+## Servers
 
-| Klasör | Açıklama | Veri Kaynağı |
-|--------|----------|--------------|
-| [`f1/`](./f1/) | Formula 1 canlı veri (sıralama, tur, telemetri) | OpenF1 API (ücretsiz) |
+| Directory | Description | Data Source |
+|-----------|-------------|-------------|
+| [`f1/`](./f1/) | Formula 1 live data (standings, laps, telemetry) | OpenF1 API (free) |
 
-## Poke'a Nasıl Eklenir
+## Adding to Poke
 
-Settings → Integrations → Add Custom MCP Server → URL girin → Save
+Settings → Integrations → Add Custom MCP Server → Enter URL → Save
 
-## Deploy
+## Deployment
 
-Her sunucu bağımsız olarak [Render.com](https://render.com) free tier'a deploy edilebilir. Her klasördeki `README.md` adımları içerir.
+Each server deploys independently to [Render.com](https://render.com) free tier. See the `README.md` inside each directory for instructions.
