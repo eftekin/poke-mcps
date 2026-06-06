@@ -1,73 +1,82 @@
-# F1 Live Data MCP
+# 🏎️ F1 Live Data MCP
 
-Real-time Formula 1 data for Poke, powered by the [OpenF1 API](https://openf1.org).
+> Formula 1 data for [Poke](https://poke.com) — live timing, telemetry, standings, and more.
 
-During race weekends, live data is available from 30 minutes before a session starts with ~3 second latency. All historical data from 2023 onwards is included.
+Powered by [OpenF1](https://openf1.org) (live session data) and [Jolpica F1](https://jolpi.ca) (official results and standings). No API keys required.
+
+During race weekends, live data streams from 30 minutes before session start with ~3s latency. Historical data is available from the 2023 season onwards.
 
 ## Tools
 
 **Schedule & Sessions**
 | Tool | Description |
 |------|-------------|
-| `get_race_schedule` | Full season calendar |
+| `get_race_schedule` | Full season calendar with circuits and dates |
 | `get_sessions` | Filter sessions by year, type, or country |
 | `get_latest_session` | Currently active or most recent session |
-| `get_meetings` | Grand Prix weekend details and dates |
+| `get_meetings` | Grand Prix weekend info and session list |
 
 **Drivers**
 | Tool | Description |
 |------|-------------|
-| `get_drivers` | Driver list, number, team, headshot URL |
+| `get_drivers` | Driver numbers, abbreviations, team, headshot URL |
 
-**Live Race Data** *(4s refresh during sessions)*
+**Live Timing** *(updates every 4s during sessions)*
 | Tool | Description |
 |------|-------------|
-| `get_positions` | Live race standings |
+| `get_positions` | Current race order |
 | `get_intervals` | Gap to leader and gap ahead |
 | `get_race_control` | Safety car, VSC, flags, DRS, penalties |
 
 **Laps & Strategy**
 | Tool | Description |
 |------|-------------|
-| `get_laps` | Lap times with sector splits and tyre compound |
-| `get_stints` | Tyre strategy per driver |
-| `get_pit_stops` | Pit stop records and durations |
+| `get_laps` | Lap times, sector splits, tyre compound |
+| `get_stints` | Tyre strategy and stint history |
+| `get_pit_stops` | Pit stop lap, duration, and time |
 
-**Car Data** *(3.7 Hz — always specify `lap_number`)*
+**Car Data** *(3.7 Hz — specify `lap_number` to avoid large payloads)*
 | Tool | Description |
 |------|-------------|
 | `get_telemetry` | Speed, throttle, brake, RPM, gear, DRS |
-| `get_location` | GPS x/y/z coordinates on track map |
+| `get_location` | GPS coordinates (x/y/z) on track map |
 
 **Conditions & Radio**
 | Tool | Description |
 |------|-------------|
-| `get_weather` | Track/air temperature, humidity, wind, rainfall |
-| `get_team_radio` | Radio messages with audio URLs |
+| `get_weather` | Track/air temp, humidity, wind, rainfall |
+| `get_team_radio` | Radio clips with audio URL |
 
-**Championship Standings**
+**Championship**
 | Tool | Description |
 |------|-------------|
 | `get_driver_standings` | Points, wins, and team per driver |
-| `get_constructor_standings` | Points and wins per team |
-| `get_race_results` | Official race results with grid and fastest lap |
+| `get_constructor_standings` | Points and wins per constructor |
+| `get_race_results` | Full results with grid, status, fastest lap |
 
 ## Stack
 
-- **Runtime**: Python 3.12
-- **Framework**: [FastMCP](https://gofastmcp.com)
-- **Transport**: Streamable HTTP
-- **Data**: [OpenF1 API](https://openf1.org) (free, no auth)
+| | |
+|--|--|
+| Language | Python 3.12 |
+| Framework | [FastMCP](https://gofastmcp.com) |
+| Transport | Streamable HTTP |
+| Live data | [OpenF1 API](https://openf1.org) — free, no auth |
+| Results & standings | [Jolpica F1](https://jolpi.ca) — free, no auth |
 
-## Deployment
+## Deploy to Render (free)
 
-### Render.com (free tier)
+1. Fork this repo
+2. [render.com](https://render.com) → **New → Web Service** → connect your fork
+3. Set **Root Directory** to `f1`
+4. Set **Instance Type** to `Free`
+5. **Build Command**: `pip install -r requirements.txt`
+6. **Start Command**: `fastmcp run src/server.py:mcp --transport streamable-http --host 0.0.0.0 --port $PORT`
+7. Deploy → copy the `onrender.com` URL
 
-1. Fork this repository
-2. Go to [render.com](https://render.com) → **New → Web Service**
-3. Connect your fork, set **Root Directory** to `f1`
-4. Configure the service:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `fastmcp run src/server.py:mcp --transport streamable-http --host 0.0.0.0 --port $PORT`
-   - **Instance Type**: Free
-5. Click **Deploy** — your MCP URL will be `https://<service-name>.onrender.com/mcp`
+## Connect to Poke
+
+**Poke → Settings → Integrations → Add Custom MCP Server**
+
+- **URL**: `https://<your-service>.onrender.com/mcp`
+- **Auth**: None
